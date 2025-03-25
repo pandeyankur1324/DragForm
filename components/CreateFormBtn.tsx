@@ -43,6 +43,7 @@ function CreateFormBtn() {
         description: "Form created successfully",
       });
       router.push(`builder/${formId}`);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.warning("Error", {
         description: "Something went wrong, please try again later",
@@ -55,7 +56,7 @@ function CreateFormBtn() {
       <DialogTrigger asChild>
         <Button
           variant={"outline"}
-          className="group border border-primary/20 h-[190px]
+          className="group border border-primary/20 h-[200px]
         items-center justify-center flex flex-col hover:border-primary
         hover:cursor-pointer border-dashed gap-4"
         >
