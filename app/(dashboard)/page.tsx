@@ -115,7 +115,7 @@ function StatsCards(props: StatsCardProps) {
   );
 }
 
-function StatsCard({
+export function StatsCard({
   title,
   value,
   icon,
@@ -208,7 +208,7 @@ function FormCard({ form }: { form: Form }) {
         )}
         {!form.published && (
           <Button asChild variant={"secondary"}>
-            <Link href={`/forms/${form.id}`}>
+            <Link href={`/builder/${form.id}`}>
               Edit form <FaEdit />
             </Link>
           </Button>
