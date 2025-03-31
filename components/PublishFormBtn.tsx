@@ -15,7 +15,7 @@ import {
 import { FaSpinner } from "react-icons/fa";
 import { toast } from "sonner";
 import { PublishForm } from "@/actions/form";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function PublishFormBtn({ id }: { id: number }) {
   const [loading, startTransition] = useTransition();
@@ -27,7 +27,7 @@ function PublishFormBtn({ id }: { id: number }) {
       toast.success("Success", {
         description: "Your form is now available to the public",
       });
-      router.replace(router.asPath);
+      router.refresh();
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.warning("Error", {

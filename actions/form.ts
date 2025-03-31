@@ -12,6 +12,7 @@ class UserNotFoundErr extends Error {
 
 export async function GetFormStats() {
   const user = await currentUser();
+  console.log(user);
 
   if (!user) {
     throw new UserNotFoundErr();
@@ -26,6 +27,7 @@ export async function GetFormStats() {
       submissions: true,
     },
   });
+  console.log(stats);
 
   const visits = stats._sum.visits || 0;
   const submissions = stats._sum.submissions || 0;

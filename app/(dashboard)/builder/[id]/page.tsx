@@ -11,7 +11,9 @@ async function BuilderPage({
     id: string;
   };
 }) {
-  const { id } = params;
+  console.log("visited");
+  const { id } = await params;
+  console.log(id);
   const form = await GetFormById(Number(id));
 
   console.log("Form is", form);

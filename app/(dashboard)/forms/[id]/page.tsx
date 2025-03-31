@@ -27,10 +27,11 @@ async function FormDetailPage({
     id: string;
   };
 }) {
-  const { id } = params;
-  const form = await GetFormById(Number(id));
+  const { id } = await params;
 
+  const form = await GetFormById(Number(id));
   console.log("Form is", form);
+
   if (!form) {
     throw new Error("Form not found");
   }
@@ -59,7 +60,7 @@ async function FormDetailPage({
           <FormLinkShare shareUrl={form.shareURL} />
         </div>
       </div>
-      <div className="w-full pt-8 gap-4 grd grid-cols-1 md:grid-cold-2 lg:grid-cols-4 container">
+      <div className="w-full pt-8 gap-4 grid grid-cols-1 md:grid-cold-2 lg:grid-cols-4 container">
         <StatsCard
           title="Total visits"
           icon={
