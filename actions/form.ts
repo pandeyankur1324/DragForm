@@ -3,10 +3,16 @@ import { currentUser } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 import { formSchema, formSchemaType } from "../schemas/form";
 
-class UserNotFoundErr extends Error {}
+class UserNotFoundErr extends Error {
+  constructor() {
+    super("User not found");
+    this.name = "UserNotFoundErr";
+  }
+}
 
 export async function GetFormStats() {
   const user = await currentUser();
+
   if (!user) {
     throw new UserNotFoundErr();
   }
