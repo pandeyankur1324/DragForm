@@ -57,8 +57,7 @@ function FormSubmitComponent({
       await SubmitForm(formUrl, jsonContent);
 
       setSubmitted(true);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
+    } catch {
       toast.warning("Error", {
         description: "Something went wrong",
       });
