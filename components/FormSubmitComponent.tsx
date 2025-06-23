@@ -9,6 +9,7 @@ import { ImSpinner2 } from "react-icons/im";
 import { SubmitForm } from "@/actions/form";
 
 function FormSubmitComponent({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   formUrl,
   content,
 }: {
@@ -19,6 +20,7 @@ function FormSubmitComponent({
   const formErrors = useRef<{ [key: string]: boolean }>({});
   const [renderKey, setRenderKey] = useState(new Date().getTime());
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [submitted, setSubmitted] = useState(false);
   const [pending, startTransition] = useTransition();
 
