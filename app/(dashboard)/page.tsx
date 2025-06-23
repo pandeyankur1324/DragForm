@@ -68,7 +68,7 @@ function StatsCards(props: StatsCardProps) {
           </div>
         }
         helperText="All time form visits"
-        value={data?.visits.toLocaleString() || ""}
+        value={data?.visits?.toLocaleString() || ""}
         loading={loading}
         className="shadow-md shadow-blue-600"
       />
@@ -81,7 +81,7 @@ function StatsCards(props: StatsCardProps) {
           </div>
         }
         helperText="All time form submissions"
-        value={data?.submissions.toLocaleString() || ""}
+        value={data?.submissions?.toLocaleString() || ""}
         loading={loading}
         className="shadow-md shadow-yellow-600"
       />
@@ -94,7 +94,7 @@ function StatsCards(props: StatsCardProps) {
           </div>
         }
         helperText="Visits that result in form submission"
-        value={data?.submissionRate.toLocaleString() + "%" || ""}
+        value={data?.submissionRate?.toLocaleString() + "%" || ""}
         loading={loading}
         className="shadow-md shadow-green-600"
       />
@@ -107,7 +107,7 @@ function StatsCards(props: StatsCardProps) {
           </div>
         }
         helperText="Visits that leave without interacting"
-        value={data?.submissionRate.toLocaleString() + "%" || ""}
+        value={data?.bounceRate?.toLocaleString() + "%" || ""}
         loading={loading}
         className="shadow-md shadow-red-600"
       />
@@ -140,7 +140,7 @@ export function StatsCard({
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">
-          {!loading && (
+          {loading && (
             <Skeleton>
               <span className="opacity-0">0</span>
             </Skeleton>
@@ -161,9 +161,11 @@ async function FormCards() {
   const forms = await GetForms();
   return (
     <>
-      {forms.map((form) => (
-        <FormCard key={form.id} form={form} />
-      ))}
+      {forms && Array.isArray(forms) && forms.length > 0 ? (
+     forms.map((form) => <FormCard key={form.id} form={form} />)
+    ) : (
+    <p>No forms found.</p>
+  )}
     </>
   );
 }
