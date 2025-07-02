@@ -20,8 +20,6 @@ import { format, formatDistance } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 
-type GetFormsReturn = Awaited<ReturnType<typeof GetForms>>;
-
 async function FormDetailPage({
   params,
 }: {
