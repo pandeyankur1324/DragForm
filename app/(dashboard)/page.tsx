@@ -22,7 +22,8 @@ import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { FaEdit } from "react-icons/fa";
 
-type Form = Awaited<ReturnType<typeof GetForms>>[number];
+type GetFormsReturn = Awaited<ReturnType<typeof GetForms>>;
+type Form = GetFormsReturn extends Array<infer U> ? U : never;
 
 export default function Home() {
   return (
@@ -160,14 +161,17 @@ function FormCardSkeleton() {
 }
 
 async function FormCards() {
-  const forms: Form[] = await GetForms();
+  const forms = await GetForms();
+  if (!Array.isArray(forms)) {
+    return <p>Error loading forms.</p>;
+  }
   return (
     <>
-      {forms && Array.isArray(forms) && forms.length > 0 ? (
-     forms.map((form) => <FormCard key={form.id} form={form} />)
-    ) : (
-    <p>No forms found.</p>
-  )}
+      {forms.length > 0 ? (
+        forms.map((form) => <FormCard key={form.id} form={form} />)
+      ) : (
+        <p>No forms found.</p>
+      )}
     </>
   );
 }
