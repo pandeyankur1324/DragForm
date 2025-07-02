@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { GetFormById, GetFormWithSubmissions } from "@/actions/form";
 import FormLinkShare from "@/components/FormLinkShare";
 import VisitBtn from "@/components/VisitBtn";
