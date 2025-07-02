@@ -143,8 +143,6 @@ function FormBuilder({ form }: { form: NonNullable<Form> }) {
     throw new Error("Form not found");
   }
 
-  const { visits, submissions } = form;
-
   return (
     <DndContext sensors={sensors}>
       <main className="flex flex-col w-full">
