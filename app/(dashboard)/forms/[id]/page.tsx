@@ -131,7 +131,7 @@ type Row = {
 async function SubmissionTable({ id }: { id: number }) {
   const form = await GetFormWithSubmissions(id);
 
-  if (!form) {
+  if (!form || "error" in form) {
     throw new Error("form not found");
   }
 
