@@ -60,6 +60,7 @@ function FormBuilder({ form }: { form: NonNullable<Form> }) {
   // Auto-save effect: save elements whenever they change (after initial load)
   useEffect(() => {
     if (!isReady) return;
+    if (!form || "error" in form) return;
     // Don't auto-save if not ready or if form is published (optional)
     if (form.published) return;
     const save = async () => {
