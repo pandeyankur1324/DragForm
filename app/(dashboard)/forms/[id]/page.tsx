@@ -1,4 +1,4 @@
-import { GetFormById, GetFormWithSubmissions } from "@/actions/form";
+import { GetFormById, GetForms, GetFormWithSubmissions } from "@/actions/form";
 import FormLinkShare from "@/components/FormLinkShare";
 import VisitBtn from "@/components/VisitBtn";
 import React, { ReactNode } from "react";
@@ -19,6 +19,9 @@ import {
 import { format, formatDistance } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
+
+type GetFormsReturn = Awaited<ReturnType<typeof GetForms>>;
+type Form = GetFormsReturn extends Array<infer U> ? U : never;
 
 async function FormDetailPage({
   params,
