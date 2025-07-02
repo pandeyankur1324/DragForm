@@ -48,6 +48,7 @@ function FormBuilder({ form }: { form: NonNullable<Form> }) {
 
   useEffect(() => {
     if (isReady) return;
+    if (!form || "error" in form) return;
     const elements = JSON.parse(form.content);
     setElements(elements);
     setSelectedElement(null);
