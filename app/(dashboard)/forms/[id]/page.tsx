@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { GetFormById, GetFormWithSubmissions } from "@/actions/form";
+import { GetFormById, GetForms, GetFormWithSubmissions } from "@/actions/form";
 import FormLinkShare from "@/components/FormLinkShare";
 import VisitBtn from "@/components/VisitBtn";
 import React from "react";
@@ -234,3 +234,6 @@ function RowCell({ type, value }: { type: ElementsType; value: string }) {
 
   return <TableCell>{node}</TableCell>;
 }
+
+type GetFormsReturn = Awaited<ReturnType<typeof GetForms>>;
+type Form = GetFormsReturn extends Array<infer U> ? U : never;
