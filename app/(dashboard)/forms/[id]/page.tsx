@@ -22,6 +22,11 @@ import { format, formatDistance } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 
+
+type GetFormsReturn = Awaited<ReturnType<typeof GetForms>>;
+type Form = GetFormsReturn extends Array<infer U> ? U : never;
+
+
 async function FormDetailPage({
   params,
 }: {
@@ -234,6 +239,3 @@ function RowCell({ type, value }: { type: ElementsType; value: string }) {
 
   return <TableCell>{node}</TableCell>;
 }
-
-type GetFormsReturn = Awaited<ReturnType<typeof GetForms>>;
-type Form = GetFormsReturn extends Array<infer U> ? U : never;
