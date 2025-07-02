@@ -1,7 +1,7 @@
-import { GetFormById, GetForms, GetFormWithSubmissions } from "@/actions/form";
+import { GetFormById, GetFormWithSubmissions } from "@/actions/form";
 import FormLinkShare from "@/components/FormLinkShare";
 import VisitBtn from "@/components/VisitBtn";
-import React, { ReactNode } from "react";
+import React from "react";
 import { StatsCard } from "../../page";
 import { LuView } from "react-icons/lu";
 import { FaWpforms } from "react-icons/fa";
@@ -164,7 +164,7 @@ async function SubmissionTable({ id }: { id: number }) {
   });
 
   const rows: Row[] = [];
-    form.FormSubmissions.forEach((submission: typeof form.FormSubmissions[number]) => {
+  form.FormSubmissions.forEach((submission: typeof form.FormSubmissions[number]) => {
     const content = JSON.parse(submission.content);
     rows.push({
       ...content,
@@ -216,7 +216,7 @@ async function SubmissionTable({ id }: { id: number }) {
 }
 
 function RowCell({ type, value }: { type: ElementsType; value: string }) {
-  let node: ReactNode = value;
+  let node: React.ReactNode = value;
 
   switch (type) {
     case "DateField":
