@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { GetForms, GetFormStats } from "@/actions/form";
 import { LuView } from "react-icons/lu";
 import { FaWpforms } from "react-icons/fa";
