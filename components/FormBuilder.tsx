@@ -66,6 +66,7 @@ function FormBuilder({ form }: { form: NonNullable<Form> }) {
         await UpdateFormContent(form.id, JSON.stringify(elements));
         toast.success("Auto-saved", { description: "Form changes saved" });
       } catch (error) {
+        console.error(error);
         toast.warning("Auto-save error", { description: "Could not auto-save form" });
       }
     };
