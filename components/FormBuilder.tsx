@@ -86,6 +86,10 @@ function FormBuilder({ form }: { form: NonNullable<Form> }) {
     );
   }
 
+  if (!form || "error" in form) {
+    throw new Error("Form not found");
+  }
+
   const shareUrl = `${window.location.origin}/submit/${form.shareURL}`;
 
   if (form.published) {
@@ -139,10 +143,6 @@ function FormBuilder({ form }: { form: NonNullable<Form> }) {
         </div>
       </>
     );
-  }
-
-  if (!form || "error" in form) {
-    throw new Error("Form not found");
   }
 
   return (
