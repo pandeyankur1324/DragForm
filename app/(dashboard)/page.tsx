@@ -15,13 +15,14 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
 import CreateFormBtn from "@/components/CreateFormBtn";
-import { Form } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
 import { formatDistance } from "date-fns";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { FaEdit } from "react-icons/fa";
+
+type Form = Awaited<ReturnType<typeof GetForms>>[number];
 
 export default function Home() {
   return (
@@ -140,12 +141,13 @@ export function StatsCard({
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">
-          {loading && (
+          {loading ? (
             <Skeleton>
               <span className="opacity-0">0</span>
             </Skeleton>
+          ) : (
+            value
           )}
-          {!loading && value}
         </div>
         <p className="text-xs text-muted-foreground pt-1">{helperText}</p>
       </CardContent>
@@ -158,7 +160,7 @@ function FormCardSkeleton() {
 }
 
 async function FormCards() {
-  const forms = await GetForms();
+  const forms: Form[] = await GetForms();
   return (
     <>
       {forms && Array.isArray(forms) && forms.length > 0 ? (

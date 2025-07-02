@@ -1,4 +1,4 @@
-import React, { startTransition, useTransition } from "react";
+import React, { useTransition } from "react";
 import { Button } from "./ui/button";
 import { HiSaveAs } from "react-icons/hi";
 import useDesigner from "./hooks/useDesigner";
@@ -9,7 +9,7 @@ import { FaSpinner } from "react-icons/fa";
 function SaveFormBtn({ id }: { id: number }) {
   const { elements } = useDesigner();
 
-  const [loading, startTrasition] = useTransition();
+  const [loading, startTransition] = useTransition();
 
   const updateFormContent = async () => {
     try {
@@ -19,6 +19,7 @@ function SaveFormBtn({ id }: { id: number }) {
         description: "Your form has been saved",
       });
     } catch (error) {
+      console.error("Failed to save form:", error);
       toast.warning("Error", {
         description: "Something went wrong",
       });

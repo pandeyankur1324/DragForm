@@ -1,6 +1,7 @@
 "use client";
 
-import { Form } from "@prisma/client";
+import { GetFormById } from "@/actions/form";
+type Form = Awaited<ReturnType<typeof GetFormById>>;
 import React, { useEffect, useState } from "react";
 import PreviewDialogBtn from "./PreviewDialogBtn";
 import SaveFormBtn from "./SaveFormBtn";
@@ -22,11 +23,12 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Confetti from "react-confetti";
+import { UpdateFormContent } from "@/actions/form";
 
-function FormBuilder({ form }: { form: Form }) {
+function FormBuilder({ form }: { form: NonNullable<Form> }) {
   console.log(form);
 
-  const { setElements, setSelectedElement } = useDesigner();
+  const { elements, setElements, setSelectedElement } = useDesigner();
   const [isReady, setIsReady] = useState(false);
 
   const mouseSensor = useSensor(MouseSensor, {
@@ -52,14 +54,33 @@ function FormBuilder({ form }: { form: Form }) {
     setIsReady(true);
     const readyTimeout = setTimeout(() => setIsReady(true), 500);
     return () => clearTimeout(readyTimeout);
-  }, [form, setElements, setSelectedElement]);
+  }, [form, setElements, setSelectedElement, isReady]);
+
+  // Auto-save effect: save elements whenever they change (after initial load)
+  useEffect(() => {
+    if (!isReady) return;
+    // Don't auto-save if not ready or if form is published (optional)
+    if (form.published) return;
+    const save = async () => {
+      try {
+        await UpdateFormContent(form.id, JSON.stringify(elements));
+        toast.success("Auto-saved", { description: "Form changes saved" });
+      } catch (error) {
+        toast.warning("Auto-save error", { description: "Could not auto-save form" });
+      }
+    };
+    save();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [elements]);
 
   if (!isReady) {
-    <div className="flex flex-col items-center justify-center w-full h-full">
-      <span className="animate-spin h-12 w-12">
-        <ImSpinner2 />
-      </span>
-    </div>;
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-full">
+        <span className="animate-spin h-12 w-12">
+          <ImSpinner2 />
+        </span>
+      </div>
+    );
   }
 
   const shareUrl = `${window.location.origin}/submit/${form.shareURL}`;

@@ -1,13 +1,25 @@
-import { NextConfig } from "next";
+// const nextConfig: NextConfig = {
+//   /* config options here */
+//   experimental: {
+//     serverActions: {
+//       bodySizeLimit: "1mb", // Example value
+//       allowedOrigins: ["*"], // Example value
+//     },
+//   },
+// };
 
-const nextConfig: NextConfig = {
-  /* config options here */
+// next.config.js
+
+const nextConfig = {
   experimental: {
     serverActions: {
-      bodySizeLimit: "1mb", // Example value
-      allowedOrigins: ["*"], // Example value
+      bodySizeLimit: "1mb",
+      allowedOrigins: ["*"],
     },
   },
 };
 
 export default nextConfig;
+
+
+// export default nextConfig;

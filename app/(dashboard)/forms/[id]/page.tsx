@@ -23,9 +23,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 async function FormDetailPage({
   params,
 }: {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
 
@@ -44,10 +42,10 @@ async function FormDetailPage({
     submissionRate = (submissions / visits) * 100;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const bounceRate = 100 - submissionRate;
 
   return (
+<<<<<<< HEAD
     <>
       <div className="flex w-full flex-col items-center mx-auto py-10 border-b border-muted">
         <div className="flex justify-between container">
@@ -118,6 +116,80 @@ async function FormDetailPage({
         <SubmissionTable id={form.id} />
       </div>
     </>
+=======
+    <div className="w-full flex justify-center">
+      <div className="w-full max-w-5xl">
+        <div className="py-10 border-b border-muted">
+          <div className="flex justify-between container">
+            <h1 className="text--4xl font-bold truncate">{form.name}</h1>
+            <VisitBtn shareUrl={form.shareURL} />
+          </div>
+        </div>
+        <div className="py-4 border-b border-muted">
+          <div className="container flex gap-2 items-center justify-between">
+            <FormLinkShare shareUrl={form.shareURL} />
+          </div>
+        </div>
+        <div className="w-full pt-8 gap-4 grid grid-cols-1 md:grid-cold-2 lg:grid-cols-4 container">
+          <StatsCard
+            title="Total visits"
+            icon={
+              <div className="text-blue-600">
+                <LuView />
+              </div>
+            }
+            helperText="All time form visits"
+            value={visits.toLocaleString() || ""}
+            loading={false}
+            className="shadow-md shadow-blue-600"
+          />
+
+          <StatsCard
+            title="Total submissions"
+            icon={
+              <div className="text-yellow-600">
+                <FaWpforms />
+              </div>
+            }
+            helperText="All time form submissions"
+            value={submissions.toLocaleString() || ""}
+            loading={false}
+            className="shadow-md shadow-yellow-600"
+          />
+
+          <StatsCard
+            title="Submission rate"
+            icon={
+              <div className="text-green-600">
+                <HiCursorClick />
+              </div>
+            }
+            helperText="Visits that result in form submission"
+            value={submissionRate.toLocaleString() + "%" || ""}
+            loading={false}
+            className="shadow-md shadow-green-600"
+          />
+
+          <StatsCard
+            title="Bounce rate"
+            icon={
+              <div className="text-red-600">
+                <TbArrowBounce />
+              </div>
+            }
+            helperText="Visits that leave without interacting"
+            value={bounceRate.toLocaleString() + "%" || ""}
+            loading={false}
+            className="shadow-md shadow-red-600"
+          />
+        </div>
+
+        <div className="container pt-10">
+          <SubmissionTable id={form.id} />
+        </div>
+      </div>
+    </div>
+>>>>>>> 4185d45 (updated all the bugs)
   );
 }
 
@@ -129,7 +201,6 @@ type Row = {
   submittedAt: Date;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function SubmissionTable({ id }: { id: number }) {
   const form = await GetFormWithSubmissions(id);
 
@@ -166,7 +237,7 @@ async function SubmissionTable({ id }: { id: number }) {
   });
 
   const rows: Row[] = [];
-  form.FormSubmissions.forEach((submission) => {
+  form.FormSubmissions.forEach((submission: typeof form.FormSubmissions[number]) => {
     const content = JSON.parse(submission.content);
     rows.push({
       ...content,
@@ -217,7 +288,6 @@ async function SubmissionTable({ id }: { id: number }) {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function RowCell({ type, value }: { type: ElementsType; value: string }) {
   let node: ReactNode = value;
 
