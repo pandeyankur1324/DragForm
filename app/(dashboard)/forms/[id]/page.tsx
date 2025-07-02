@@ -30,7 +30,7 @@ async function FormDetailPage({
   const form = await GetFormById(Number(id));
   console.log("Form is", form);
 
-  if (!form) {
+  if (!form || "error" in form) {
     throw new Error("Form not found");
   }
 
