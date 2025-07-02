@@ -168,7 +168,7 @@ async function FormCards() {
   return (
     <>
       {forms.length > 0 ? (
-        forms.map((form) => <FormCard key={form.id} form={form} />)
+        forms.map((form) => <FormCard key={form.id} form={form as any} />)
       ) : (
         <p>No forms found.</p>
       )}
