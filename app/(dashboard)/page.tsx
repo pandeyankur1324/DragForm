@@ -23,8 +23,18 @@ import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { FaEdit } from "react-icons/fa";
 
-type GetFormsReturn = Awaited<ReturnType<typeof GetForms>>;
-type Form = GetFormsReturn extends Array<infer U> ? U : never;
+type Form = {
+  id: number;
+  name: string;
+  description: string;
+  userId: string;
+  visits: number;
+  submissions: number;
+  createdAt: Date;
+  published: boolean;
+  content: string;
+  shareURL: string;
+};
 
 export default function Home() {
   return (
@@ -169,7 +179,7 @@ async function FormCards() {
   return (
     <>
       {forms.length > 0 ? (
-        forms.map((form) => <FormCard key={form.id} form={form as any} />)
+        forms.map((form) => <FormCard key={form.id} form={form} />)
       ) : (
         <p>No forms found.</p>
       )}
